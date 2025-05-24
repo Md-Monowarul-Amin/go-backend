@@ -18,6 +18,7 @@ type Truck interface {
 	GetCargo() int
 }
 
+// Implements Truck interface
 type NormalTruck struct {
 	id    string
 	cargo int
@@ -27,6 +28,7 @@ func (t *NormalTruck) LoadCargo() error {
 	t.cargo += 2
 	return nil
 }
+
 func (t *NormalTruck) UnloadCargo() error {
 	t.cargo -= 2
 	return nil
@@ -39,17 +41,19 @@ func (t *NormalTruck) GetCargo() int {
 	return t.cargo
 }
 
+// Implements Truck interface
 type ElectricTruck struct {
 	id      string
 	cargo   int
 	battery float64
 }
 
-func (t ElectricTruck) LoadCargo() error {
+func (t *ElectricTruck) LoadCargo() error {
 	t.cargo += 2
 	return nil
 }
-func (t ElectricTruck) UnloadCargo() error {
+
+func (t *ElectricTruck) UnloadCargo() error {
 	t.cargo -= 2
 	return nil
 }
@@ -78,7 +82,7 @@ func main() {
 				fmt.Printf("Truck %s is not found.\n", truck.id)
 			}
 
-			log.Fatal("Error processing truck: %s", err)
+			log.Fatal("Error processing truck: ", err)
 		}
 	}
 
